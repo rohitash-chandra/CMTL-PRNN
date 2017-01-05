@@ -1,57 +1,11 @@
 function [TrainInput, TrainTarget, ValidInput, ValidTarget, TestInput, TestTarget] = Data(problem, output)
   
  if problem ==1
- load Sunspot/train.txt;  
-load  Sunspot/validation.txt;   
-load Sunspot/test.txt;
+ load train.txt;  
+load  validation.txt;   
+load test.txt;
  end
- 
- if problem ==2
-     
- load Lazer/train.txt;  
-load  Lazer/validation.txt;   
-load Lazer/test.txt;
-      
- end
- 
-  if problem ==4
- load Lorenz/train.txt;  
-load  Lorenz/validation.txt;   
-load Lorenz/test.txt;
- end
- 
- if problem ==3
-     
- load Mackey/train.txt;  
-load  Mackey/validation.txt;   
-load  Mackey/test.txt;
-      
- end
- 
- if problem ==5
-     
- load Henon/train.txt;  
-load  Henon/validation.txt;   
-load  Henon/test.txt;
-      
- end
- 
- if problem ==6
-     
- load ACFinance/train.txt;  
-load  ACFinance/validation.txt;   
-load  ACFinance/test.txt;
-      
- end
- 
- if problem ==7
- 
-
- load Rossler/train.txt;  
-load  Rossler/validation.txt;   
-load  Rossler/test.txt;
-      
- end
+  
  
  
  TRAIN=train;
