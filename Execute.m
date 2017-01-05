@@ -1,7 +1,5 @@
-% CCGA for FNN by Rohitash Chandra, 2016: c.rohitash(at)gmail.com
-%note this is for hidden layer. But many other layer can be done
-
-% can use for classfication and also for time series predition or
+ % by Rohitash Chandra, 2016: c.rohitash(at)gmail.com 
+ %for time series predition or
 % regression. 
 clear all
 clc
@@ -17,19 +15,18 @@ MaxFE = 200000  ; % 4bit
  
 
  MinError = [0.001]; %Min Error for each problem
- NumProb = 5;
+ NumProb = 1; % just test one problem (sunspot)
   ProbMin = [-5]; % initial pop range
   ProbMax = [5];
 
 
- NumSteps = 10;
+ NumSteps = 10; % max prediction horizon
 
- 
- %Decom = 5; % type of decomposition of NN. 1 = Layer level, 2 = Network level, 3 = NSP, 4 = Synapse level, 5 is ESP
+  
 
-MaxRun = 30;
+MaxRun = 3; % number of runs (experiments)
 
-for app = 4:NumProb 
+for app = 1:NumProb 
 
 for depth = 5:5:5
         
@@ -50,8 +47,7 @@ decom = 5;
 
               
             H(t) = ((t*4)/2) + 7;
-            Topology{t} = [Input, H(t) , Output];
-          %   Topology{t}
+            Topology{t} = [Input, H(t) , Output]; 
               
            end 
             
@@ -132,8 +128,7 @@ decom = 5;
        
  
       
-     
- %  fprintf(out1, '%d %.6', Run, FitT1(Run)); % print to file - best solution with fitnesss
+      
      fprintf(out1,'%d %d  %d   %.6f %.6f %.6f %.6f %.6f  %.6f %.6f %.6f %.6f %.6f  \n',  app,  depth,   Run,        Fit{1}.Error(Run),    Fit{2}.Error(Run),    Fit{3}.Error(Run),    Fit{4}.Error(Run),   Fit{5}.Error(Run), Fit{6}.Error(Run),    Fit{7}.Error(Run),    Fit{8}.Error(Run),    Fit{9}.Error(Run),   Fit{10}.Error(Run));
     fprintf(out1,'%d    %d  %d  %.6f %.6f %.6f %.6f %.6f %.6f %.6f %.6f %.6f %.6f    \n',  app,  depth,   Run,     T{1}.Test(Run),  T{2}.Test(Run),  T{3}.Test(Run), T{4}.Test(Run),  T{5}.Test(Run), T{6}.Test(Run),  T{7}.Test(Run),  T{8}.Test(Run), T{9}.Test(Run),  T{10}.Test(Run) );
     
