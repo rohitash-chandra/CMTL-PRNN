@@ -2,8 +2,7 @@
 %---------------------------------------------------------
 % FNNetwork in OOP by Dr. Rohitash Chandra, 2016: c.rohitash@gmail.com
 %
-
-%to use later: http://www.codeproject.com/Articles/55691/Neural-Network-Learning-by-the-Levenberg-Marquardt.aspx
+ 
 %--------------------------------------------------------
 
 
@@ -99,19 +98,7 @@
  
           obj.TestData.Input =   TestInput;
           obj.TestData.Target =    TestTarget;
-%         
-%         function obj = SetData(obj, TrainFile, TestFile) 
-%           delimiterIn = ' ';
-%           Data = importdata(TrainFile,delimiterIn);
-%           delimiterIn = ' ';
-%           TData = importdata(TestFile,delimiterIn);
-%           obj.TrainData.Input = Data(1:end,1:end-obj.NumOutput);
-%           obj.TrainData.Target =  Data(1:end,obj.NumInput+1:end);
-% 
-%          % obj.TrainData.Input  
-%          % obj.TrainData.Target 
-%           obj.TestData.Input = TData(1:end,1:end-obj.NumOutput);
-%           obj.TestData.Target =  TData(1:end,obj.NumInput+1:end);
+%          
           
          obj.NumPattern  =  size(obj.TrainData.Input,1); % size of traindata
           
@@ -127,14 +114,7 @@
              %obj.Layer(layer).Bias = (  rand(1,obj.Topology(layer)) - 0.5)/10; 
              obj.Layer(layer).Bias = 0.5;
           end
-          
-          %  for layer=1: obj.NumLayers-1 % traverse through the layers 
-            % obj.Layer(layer).Weights   
-           % end
            
-             % for layer=2: obj.NumLayers % traverse through the layers  
-            % obj.Layer(layer).Bias  
-             % end
              
           obj.NetOutput = zeros(obj.NumPattern,obj.Topology(end)); % used to save the prediction by NN 
           %(used for training and test data. assumes that training data will be shorter than test data)
@@ -182,19 +162,14 @@
           
       end 
       
-       function obj = BackwardPass(obj, LRate,p) 
-           
-           %NOTE: not sure if BP working - so we use EA only. There seems
-           %to be some error in BP, so you can help me fix it
+       function obj = BackwardPass(obj, LRate,p)  
            
            Alpha = 0.01; % weight decay 
            
       for  x=1: obj.Topology(end)
 		obj.Layer(end).Error(x) = (obj.Layer(end).Output(x)*(1- obj.Layer(end).Output(x)))*(obj.Target(x)-obj.Layer(end).Output(x) );
       end
-      
-      %obj.Layer(end).Error 
-      %disp('Error');
+       
        for layer = obj.NumLayers-1:-1:2 % go backwards 
            %layer
                     Sum = 0;
@@ -204,13 +179,9 @@
                      end  
                     obj.Layer(layer).Error(row) = (obj.Layer(end).Output(x)*(1- obj.Layer(end).Output(x))) * Sum ;  
                     Sum = 0;
-                  end   
+                  end    
                   
-       % obj.Layer(layer).Error
-                  
-       end 
-       % disp('Weightup');
-       
+       end  
        
        for layer = obj.NumLayers-1:-1:1 % go backwards  
           % layer
@@ -219,10 +190,7 @@
               			tmp = ( LRate * obj.Layer(layer+1).Error(col) * obj.Layer(layer).Output(row)  );
      		        	obj.Layer(layer).Weights(row,col) = obj.Layer(layer).Weights(row,col) +  ( tmp  -  ( Alpha * tmp) ) ;%update weight
                      end    
-                  end  
-                
-      % obj.Layer(layer).Weights  
-                  
+                  end   
        end   
        % disp('Biasup');
        for layer = obj.NumLayers:-1:2 % go backwards  
@@ -240,23 +208,15 @@
        end 
       
        function obj = SaveTrainedNet(obj, Solution,  Topo,    sp) 
-           
-          % if sp ==1
+            
              obj = FNNetwork.TransSolutionWeights(obj,Solution,    Topo,   sp);
-          % end
-        %   if sp ==2
-           %  obj = FNNetwork.TransSolutionWeights(obj,Solution,   T1Topo, T2Topo, sp);
-          % end
+         
            
        end
        
        function obj = TransSolutionWeights(obj,SolutionVec,  Topo,   sp)  % for EA - to encode EA solution in NN
            
-           Top1  = Topo{1};
-%            Top2  = Topo{2};
-%            Top3       = Topo{3};
-%            Top4       = Topo{4};
-%            
+           Top1  = Topo{1}; 
            
            
            position = 1;
@@ -264,23 +224,7 @@
            
            
            if obj.Decomposition == 5 % Multitask
-              %   obj.Topology
-%                 In1 = SmallTopo(1);
-%                 In1 = BiggerTopo(1);
-%                 
-%                 In3 = obj.Topology(1);
-%                 
-%                 H1 =  Top1(2); 
-%                 H2 =  Top2(2);
-%                 H3=  Top3(2); 
-%                 H4 = Top4(2);
-%                 
-%                 H5 =   obj.Topology(2); 
-             
-%                 
-%                 Out1 = SmallTopo(3); 
-%                 Out2 = BiggerTopo(3);
-%                 Out3 =  obj.Topology(3);
+            
                 
               for layer = 1: obj.NumLayers-1
                
@@ -295,32 +239,7 @@
                
              end 
              
-          %   if In1 != In2 | H1 !=H2 | Out1 != Out2
-            
-%              %----------------   
-%              
-%              end
-%              
-%              
-%              if  sp == 5
-%                  
-%                  MaxSteps = 5;
-                 
-%                  
-%            Top1  = Topo{1};
-%            Top2  = Topo{2};
-%            Top3       = Topo{3};
-%            Top4       = Topo{4};
-%            
-%                  
-                 
-                 
-%                  
-%                   H1 =  Top1(2); 
-%                 H2 =  Top2(2);
-%                 H3=  Top3(2); 
-%                 H4 = Top4(2);
-                 
+        
           if sp >= 3 
                 % sp
             for step = 2:sp-1
@@ -350,13 +269,13 @@
                    end 
                             
                end   
-                % position
+               
             end
             
           end
       %  ------------------------------------   
              
-             % end part
+             
              
              if sp >= 2
                layer = 1;
@@ -461,12 +380,7 @@
          for patt = 1:size(obj.TrainData.Input,1)  
              obj=   FNNetwork.ForwardPass(obj,patt, obj.TrainData);  
              
-            % obj.TrainData.Target(patt, 1:end)
-            % obj.NetOutput(patt, 1:end)
-             
-             
-             % can output to file here - for time series problem - each
-             % prediction
+            
          end
          
      obj.TrainRMSE = FNNetwork.RMSE(obj,  obj.TrainData);  
