@@ -1,6 +1,9 @@
  % by Rohitash Chandra, 2016: c.rohitash(at)gmail.com 
- %for time series predition or
-% regression. 
+ %for multi-step time series predition  
+
+% built on: https://github.com/rohitash-chandra/Cooperative-Coevolution-CMAES
+
+
 clear all
 clc
 
