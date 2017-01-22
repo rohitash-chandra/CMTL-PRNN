@@ -31,7 +31,7 @@ MaxRun = 3; % number of runs (experiments)
 
 for app = 1:NumProb 
 
-for depth = 5:5:5 % depth of search (in generations) for sub-populations in Cooperative Coevlution Alg
+for depth = 5:5:5 % depth of search (in generations) for sub-populations in Cooperative Coevlution Alg. Depth of search of 1 is best but %takes more computational resources as there is more time used for transfer of knowledge at every generation. 
         
  
         Suc = 0; % when minimum error is satisfied
