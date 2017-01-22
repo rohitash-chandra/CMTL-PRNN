@@ -221,9 +221,7 @@
            
            position = 1;
            
-           
-           
-           if obj.Decomposition == 5 % Multitask
+            
             
                 
               for layer = 1: obj.NumLayers-1
@@ -237,7 +235,7 @@
                             position = position + 1; 
                end  
                
-             end 
+            end 
              
         
           if sp >= 3 
@@ -307,9 +305,7 @@
             
              
              end
- 
-    end %if decom is 5
-           
+  
            
            
            
