@@ -31,9 +31,9 @@ MaxRun = 3; % number of runs (experiments)
 
 for app = 1:NumProb 
 
-for depth = 5:5:5
+for depth = 5:5:5 % depth of search (in generations) for sub-populations in Cooperative Coevlution Alg
         
-decom = 5;
+ 
         Suc = 0; % when minimum error is satisfied
         
         SucT1 = 0;
@@ -65,15 +65,14 @@ decom = 5;
                               %set data and NN
             [TrainInput{step}, TrainTarget{step}, ValidInput{step}, ValidTarget{step}, TestInput{step}, TestTarget{step}] = Data(app, step);
 
-             net{step} = FNNetwork(  TrainInput{step}, TrainTarget{step}, ValidInput{step}, ValidTarget{step} ,  Topology{step}, decom); 
+             net{step} = FNNetwork(  TrainInput{step}, TrainTarget{step}, ValidInput{step}, ValidTarget{step} ,  Topology{step}, depth); 
          end 
             
            
            PopSize = round((4+floor(3*log(D(end))))) % use D for larged Hidden neurons
-
-                  depth = decom;
+ 
      
-          CCGA = CooperativeCoevolution(PopSize,Dimen, decom, ProbMax, ProbMin);   
+          CCGA = CooperativeCoevolution(PopSize,Dimen, depth, ProbMax, ProbMin);   
        
    
       
